@@ -18,9 +18,10 @@ Azure Functionsの概要については、[こちら](https://docs.microsoft.com
 
 * Microsoft Azureアカウント
     * [無料試用アカウント](https://azure.microsoft.com/ja-jp/free/) (要クレジットカード)
-    * (学生向け) [Microsoft Imagine](https://imagine.microsoft.com/ja-jp/account)
 * 開発環境(2018/03時点)
     * Node 8.0+(v8.10.0)
+        * [Windows](https://qiita.com/taiponrock/items/9001ae194571feb63a5e)
+        * [Mac](https://qiita.com/kyosuke5_20/items/c5f68fc9d89b84c0df09)
     * Azure Core Function Tools 2.0(2.0.1-beta.23-1)
         * `npm install -g azure-functions-core-tools@core`
     * .NET Core 2.0(2.1.4) [Windows](https://www.microsoft.com/net/download/windows/build) | [Mac](https://www.microsoft.com/net/download/macos)
