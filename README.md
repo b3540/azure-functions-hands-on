@@ -17,7 +17,7 @@ Azure Functionsの概要については、[こちら](https://docs.microsoft.com
 ## 必要なもの
 
 * Microsoft Azureアカウント
-    * [無料試用アカウント](https://azure.microsoft.com/ja-jp/free/) (要クレジットカード)
+    * [無料試用アカウント](https://azure.microsoft.com/ja-jp/free/) (要クレジットカード)
     * (学生向け) [Microsoft Imagine](https://imagine.microsoft.com/ja-jp/account)
 * 開発環境(2018/03時点)
     * Node 8.0+(v8.10.0)
@@ -28,4 +28,4 @@ Azure Functionsの概要については、[こちら](https://docs.microsoft.com
     * [Azure Account(0.3.1)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account) (Visual Studio Code拡張)
     * [Azure Functions for Visual Studio Code (0.7.0)](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) (Visual Studio Code拡張)
 * SendGridアカウント(ハンズオン時は提供します)
-* Slackスペース(ハンズオン時は提供します)
+* Slackスペース(ハンズオン時は提供します)
