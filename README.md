@@ -32,9 +32,9 @@ Azure Functionsの概要については、[こちら](https://docs.microsoft.com
 * Slackスペース(ハンズオン時は提供します)
 
 
-## 用語集
+## 用語集
 
-手順中に利用する略称などは以下の通りです。知らない単語が出てきたらここを参照ください。
+手順中に利用する略称などは以下の通りです。知らない単語が出てきたらここを参照ください。
 
 * VSCode
     * Visual Studio Code
@@ -43,9 +43,9 @@ Azure Functionsの概要については、[こちら](https://docs.microsoft.com
 # 事前手順
 
 
-## VSCodeの拡張機能インストール手順
+## VSCodeの拡張機能インストール手順
 
-VSCodeメニューの一番下にある四角いアイコンを選択します。
+VSCodeメニューの一番下にある四角いアイコンを選択します。
 
 ![Open VSCode Menu](./images/VscodeExtension001.png)
 
@@ -189,7 +189,7 @@ VSCode内のEXPLORERにある「AZURE FUNCTIONS」拡張から作成したFuncti
 
 ![Test Function Url](./images/TestRequest002.png)
 
-## バージョン2(メール送信対応)への修正
+## バージョン2(メール送信対応)への修正
 
 HTTPレスポンスを返すFunctionが出来ましたので、次はメール送信が出来るように変更します。
 
@@ -256,17 +256,17 @@ module.exports = function (context, req) {
 
 ```https://<FunctionApp名>.azurewebsites.net/api/HttpTriggerJS/name/hoge2?code=<リクエストキー>```
 
-しばらくすると宛先として設定したメールアドレスへメールが届きます。
+しばらくすると宛先として設定したメールアドレスへメールが届きます。
 
 ![Test Request](./images/TestRequest003.png)
 
 
-## バージョン3(Slack対応)への修正
+## バージョン3(Slack対応)への修正
 
-FunctionsからSendGridを経由してメール送信が出来るようになりました。  
+FunctionsからSendGridを経由してメール送信が出来るようになりました。  
 今度はSlackへメッセージをポストしてみます。
 
-SlackのIncoming Webhookを利用するため、FunctionsからHTTPリクエストを行う必要があります。  
+SlackのIncoming Webhookを利用するため、FunctionsからHTTPリクエストを行う必要があります。  
 今回は、NodeJSでHTTPリクエストが行えるsuperagentを利用します。
 
 ターミナルで `HttpTriggerWithParametersJS` ディレクトリへ移動します。
@@ -331,7 +331,7 @@ npm WARN httptriggerwithparametersjs@1.0.0 No repository field.
 added 24 packages in 3.589s
 ```
 
-これで、superagentを利用する準備が出来ました。
+これで、superagentを利用する準備が出来ました。
 
 `HttpTriggerWithParametersJS/index.js` を開き、以下のように修正します。  
 
