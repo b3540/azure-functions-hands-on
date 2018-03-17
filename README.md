@@ -346,8 +346,6 @@ module.exports = function (context, req) {
     .set('Content-Type', 'application/json')
     .send({text: "Your name is [" + req.params.name + "]."})
     .end(function(res){
-        context.log(res.message);
-
         context.bindings.message = {
             personalizations: [
               { to: [ { email: "<受信可能なメールアドレス>" } ] }
