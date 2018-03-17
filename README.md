@@ -371,6 +371,38 @@ module.exports = function (context, req) {
 };
 ```
 
+`HttpTriggerWithParametersJS/function.json` はこのようになります。  
+バージョン2からの変更はありません。
+
+```
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "HttpTriggerJS/name/{name}",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "sendGrid",
+      "name": "message",
+      "apiKey": "SENDGRID_APIKEY",
+      "direction": "out"
+    }
+  ]
+}
+```
+
 ## デプロイ
 
 修正したFunctionをデプロイします。  
