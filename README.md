@@ -346,7 +346,7 @@ module.exports = function (context, req) {
     .set('Content-Type', 'application/json')
     .send({text: "Your name is [" + req.params.name + "]."})
     .end(function(res){
-        context.log(res.message);
+        // context.log(res.message);
 
         context.bindings.message = {
             personalizations: [
@@ -369,6 +369,38 @@ module.exports = function (context, req) {
         context.done();    
     });
 };
+```
+
+`HttpTriggerWithParametersJS/function.json` はこのようになります。  
+バージョン2からの変更はありません。
+
+```
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "route": "HttpTriggerJS/name/{name}",
+      "methods": [
+        "get"
+      ]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "sendGrid",
+      "name": "message",
+      "apiKey": "SENDGRID_APIKEY",
+      "direction": "out"
+    }
+  ]
+}
 ```
 
 ## デプロイ
