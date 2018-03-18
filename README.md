@@ -319,7 +319,7 @@ Is this ok? (yes) yes
     "superagent": "^3.8.1"
   }
 ```
-
+
 再度、ターミナルに戻り `npm install` を実行します。
 
 ```
@@ -420,3 +420,82 @@ Slackへメッセージが届きます。
 ![Test Request](./images/TestRequest004.png)
 
 
+## おまけ：Function Appの実行履歴をApplication Insightsで確認してみよう
+### Application Insightsの作成
+VSCode内の「AZURE FUNCTIONS」拡張にある作成した項目を右クリックし、「Open In Portal」を選択します。
+
+![Open In Portal](./images/AppInsightsVersion001.jpg)
+
+Azureのポータル画面が表示されたら「プラットフォーム機能」「すべての設定」と進みます。
+
+![Function App Settings](./images/AppInsightsVersion002.jpg)
+
+概要の「Application Insights」を選択し、下記のように設定しOKボタンをクリックします。
+
+* 新しいリソースの作成
+* 新しいリソースの名前：変更しない（ただしエラーが表示されていれば別の名前に変更する）
+* 場所：米国東部
+
+![Create Application Insights Resource](./images/AppInsightsVersion003.jpg)
+
+「Application Insightsでさらに表示」をクリックし、Application Insightsの画面に移ります。  
+メニューから「プロパティ」を開き、インストルメンテーションキーをコピーします。  
+※テキストファイル等に控えておきましょう。
+
+![Copy Instrumentation Key](./images/AppInsightsVersion004.jpg)
+
+Application Insightsの作成は以上で終了です。Azureのポータル画面は開いたままにしておきましょう。
+
+### 環境変数の追加
+VSCode内の「AZURE FUNCTIONS」拡張にある「Application Settings」を右クリックし、「Add new setting...」を選択します。  
+Key名を「APPINSIGHTS_INSTRUMENTATIONKEY」、Valueにインストルメンテーションキーを入力します。
+
+### Application Insightsを利用するようにコードを変更する
+ターミナルを開き `npm install --save applicationinsights` を入力します。  
+`HttpTriggerWithParametersJS/index.js` を開き、以下のように修正します。
+
+```
+var request = require('superagent');
+
+var appInsights = require('applicationinsights');
+appInsights.setup(process.env['APPINSIGHTS_INSTRUMENTATIONKEY']).start();
+
+module.exports = function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+    request
+    .post("<Slackポスト用URL>")
+    .set('Content-Type', 'application/json')
+    .send({text: "Your name is [" + req.params.name + "]."})
+    .end(function(res){
+        // context.log(res.message);
+
+        context.bindings.message = {
+            personalizations: [
+              { to: [ { email: "<受信可能なメールアドレス>" } ] }
+            ],
+            subject: "[Fukuazu Hands-on] Sample Mail",
+            content:[ 
+                { 
+                    type: "text/plain",
+                    value: "Your name is [" + req.params.name + "]." 
+                }
+            ],
+            from: { email: "azure_f87070529aadda227182b98034bf05f3@azure.com" }
+        };
+    
+        context.res = {
+            // status: 200, /* Defaults to 200 */
+            body: "Hello " + req.params.name
+        };
+        context.done();    
+    });
+};
+```
+
+上記の修正が済んだら、再度Azureにデプロイを行いましょう。
+
+### Application Insightsの結果を確認してみよう
+デプロイ後、何度かFunction Appを実行したうえで、Application Insightsの画面にて「検索」をクリックし、動作結果を確認することができます。
+
+![Search Application Insights](./images/AppInsightsVersion005.jpg)
